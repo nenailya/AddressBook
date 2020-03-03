@@ -40,4 +40,24 @@ public class test {
         assertEquals(s, a.findHumans("Улица"));
     }
 
+    @Test
+    public void test4() {
+        AdresnayaKniga a = new AdresnayaKniga();
+        a.add("Иванов", new Adress("Улица", "12", "71"));
+        a.add("Иванова", new Adress("Улица", "12", "71"));
+        Set<String> s = new HashSet<String>();
+        s.add("Иванов");
+        a.removeHuman("Иванова", new Adress("Улица", "12", "71"));
+        assertEquals(s, a.findHumans("Улица"));
+    }
+
+    @Test
+    public void test5() {
+        AdresnayaKniga a = new AdresnayaKniga();
+        a.add("Иванов", new Adress("Улица", "12", "71"));
+        a.izmenenieAdresa("Иванов", new Adress("Улица", "12", "722"));
+        Set<String> s = new HashSet<String>();
+        s.add("Иванов");
+        assertEquals(s, a.findHumans("Улица"));
+    }
 }
