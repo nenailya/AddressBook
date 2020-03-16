@@ -9,22 +9,26 @@ public final class AdresnayaKniga {
 
 
     public void add(String familiya, Adress adres) {
-        if (spisok.putIfAbsent(familiya, adres) != null) throw new IllegalArgumentException() ;
+        if (spisok.putIfAbsent(familiya, adres) != null) throw new IllegalArgumentException();
+        spisok.putIfAbsent(familiya, adres);
         dlyaPoiska.computeIfAbsent(adres.getYlitsa(), key -> new HashMap<>()).computeIfAbsent(adres.getNomerdoma(), key -> new HashSet<>()).add(familiya);
     }
 
     public void removeHuman(String familiya) {
         Adress a = findAddress(familiya);
         if (spisok.remove(familiya) == null) return;
+        spisok.remove(familiya);
         dlyaPoiska.get(a.getYlitsa()).get(a.getNomerdoma()).remove(familiya);
     }
 
     public void izmenenieAdresa(String familiya, Adress adres) {
-        Map<String, Set<String>> map = dlyaPoiska.get(adres.getYlitsa());
+        Adress a = findAddress(familiya);
+        Map<String, Set<String>> map = dlyaPoiska.get(a.getYlitsa());
         if (map == null) throw new IllegalArgumentException() ;
-        Set<String> set = map.get(adres.getNomerdoma());
+        Set<String> set = map.get(a.getNomerdoma());
         if (set == null) throw new IllegalArgumentException();
-        set.remove(familiya);
+        spisok.remove(familiya);
+        spisok.putIfAbsent(familiya, adres);
         dlyaPoiska.computeIfAbsent(adres.getYlitsa(), key -> new HashMap<>()).computeIfAbsent(adres.getNomerdoma(), key -> new HashSet<>()).add(familiya);
     }
 
