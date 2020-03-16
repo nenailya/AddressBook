@@ -23,7 +23,7 @@ public class test {
         AdresnayaKniga a = new AdresnayaKniga();
         a.add("Иванов", new Adress("Улица", "12", "71"));
         a.add("Иванова", new Adress("Улица", "12", "71"));
-        Set<String> s = new HashSet<String>();
+        Set<String> s = new HashSet<>();
         s.add("Иванов");
         s.add("Иванова");
         assertEquals(s, a.findHumans("Улица", "12"));
@@ -34,7 +34,7 @@ public class test {
         AdresnayaKniga a = new AdresnayaKniga();
         a.add("Иванов", new Adress("Улица", "12", "71"));
         a.add("Иванова", new Adress("Улица", "12", "71"));
-        Set<String> s = new HashSet<String>();
+        Set<String> s = new HashSet<>();
         s.add("Иванов");
         s.add("Иванова");
         assertEquals(s, a.findHumans("Улица"));
@@ -45,9 +45,9 @@ public class test {
         AdresnayaKniga a = new AdresnayaKniga();
         a.add("Иванов", new Adress("Улица", "12", "71"));
         a.add("Иванова", new Adress("Улица", "12", "71"));
-        Set<String> s = new HashSet<String>();
+        Set<String> s = new HashSet<>();
         s.add("Иванов");
-        a.removeHuman("Иванова", new Adress("Улица", "12", "71"));
+        a.removeHuman("Иванова");
         assertEquals(s, a.findHumans("Улица"));
     }
 
@@ -56,7 +56,7 @@ public class test {
         AdresnayaKniga a = new AdresnayaKniga();
         a.add("Иванов", new Adress("Улица", "12", "71"));
         a.izmenenieAdresa("Иванов", new Adress("Улица", "12", "722"));
-        Set<String> s = new HashSet<String>();
+        Set<String> s = new HashSet<>();
         s.add("Иванов");
         assertEquals(s, a.findHumans("Улица"));
     }

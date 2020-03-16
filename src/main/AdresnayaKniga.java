@@ -13,10 +13,10 @@ public final class AdresnayaKniga {
         dlyaPoiska.computeIfAbsent(adres.getYlitsa(), key -> new HashMap<>()).computeIfAbsent(adres.getNomerdoma(), key -> new HashSet<>()).add(familiya);
     }
 
-    public boolean removeHuman(String familiya, Adress adres) {
-        if (spisok.remove(familiya) == null) return false;
-        dlyaPoiska.get(adres.getYlitsa()).get(adres.getNomerdoma()).remove(familiya);
-        return true;
+    public void removeHuman(String familiya) {
+        Adress a = findAddress(familiya);
+        if (spisok.remove(familiya) == null) return;
+        dlyaPoiska.get(a.getYlitsa()).get(a.getNomerdoma()).remove(familiya);
     }
 
     public void izmenenieAdresa(String familiya, Adress adres) {
