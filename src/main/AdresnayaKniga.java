@@ -10,15 +10,14 @@ public final class AdresnayaKniga {
 
     public void add(String familiya, Adress adres) {
         if (spisok.putIfAbsent(familiya, adres) != null) throw new IllegalArgumentException();
-        spisok.putIfAbsent(familiya, adres);
         dlyaPoiska.computeIfAbsent(adres.getYlitsa(), key -> new HashMap<>()).computeIfAbsent(adres.getNomerdoma(), key -> new HashSet<>()).add(familiya);
     }
 
-    public void removeHuman(String familiya) {
+    public boolean removeHuman(String familiya) {
         Adress a = findAddress(familiya);
-        if (spisok.remove(familiya) == null) return;
-        spisok.remove(familiya);
+        if (spisok.remove(familiya) == null) return false;
         dlyaPoiska.get(a.getYlitsa()).get(a.getNomerdoma()).remove(familiya);
+        return true;
     }
 
     public void izmenenieAdresa(String familiya, Adress adres) {

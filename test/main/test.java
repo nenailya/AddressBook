@@ -10,7 +10,7 @@ import org.junit.rules.ExpectedException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class test {
+class testForAdresnayaKniga {
     @Test
     public void test1() {
         AdresnayaKniga a = new AdresnayaKniga();
